@@ -1,6 +1,6 @@
 import { Box, Grid2 as Grid, Typography } from '@mui/material';
 import React from 'react';
-import { CONTACT_INFO, SOCIAL_LINKS } from '../const/constants';
+import { CONTACT_INFO, SOCIAL_LINKS } from '../constants';
 import Image from 'next/image';
 import Link from 'next/link';
 

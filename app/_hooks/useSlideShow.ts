@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 interface SlideShowOptions {
   totalSlides: number;
   intervalSeconds?: number;
-  gapPixels?: number;
 }
 
 interface UseSlideShowReturn {
@@ -20,22 +19,15 @@ interface UseSlideShowReturn {
 export const useSlideShow = ({
   totalSlides,
   intervalSeconds = 5,
-  gapPixels = 30,
 }: SlideShowOptions): UseSlideShowReturn => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [windowWidth, setWindowWidth] = useState(0);
 
-  // Initialize window width on client side
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
-
-  // Calculate slide position including gap
   const getSlidePosition = (index: number) => {
-    if (windowWidth === 0) return -(index * 100); // Default behavior before window width is available
-    const gapPercentage = (gapPixels / windowWidth) * 100;
-    return -(index * (100 + gapPercentage));
+    const slideWidth = 100; // 100%
+    const position = -(index * slideWidth);
+
+    return position;
   };
 
   // Auto play effect
@@ -48,16 +40,6 @@ export const useSlideShow = ({
 
     return () => clearInterval(interval);
   }, [isAutoPlaying, intervalSeconds, totalSlides]);
-
-  // Window resize handler
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const handlePrevSlide = () => {
     setIsAutoPlaying(false);

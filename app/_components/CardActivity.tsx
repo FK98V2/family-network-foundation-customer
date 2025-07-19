@@ -6,10 +6,19 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Image from 'next/image';
-import mockCardImage from '@/public/showCaseMock/img-card.svg';
 import { ArrowForward } from '@mui/icons-material';
+import { Activity, InfoGraphic } from '@/app/type';
+import mockCardImage from '@/public/showCaseMock/img-card.svg';
+import TimeShow from './TimeShow';
+import Link from 'next/link';
 
-export default function CardActivity() {
+export default function CardActivity({
+  id,
+  title,
+  markdownContent,
+  thumbnailUrl,
+  createdAt,
+}: Activity | InfoGraphic) {
   return (
     <Card
       sx={{
@@ -22,30 +31,34 @@ export default function CardActivity() {
         width='100%'
         height={{ xs: '236px', md: '300px' }}
       >
-        <Image
-          src={mockCardImage.src}
-          alt='activity'
-          fill
-          style={{
-            objectFit: 'cover',
-            objectPosition: 'start',
-          }}
-        />
+        {
+          <Image
+            src={thumbnailUrl || mockCardImage.src}
+            alt='activity'
+            fill
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'start',
+            }}
+          />
+        }
       </Box>
       <CardContent>
         <Typography gutterBottom variant='h3' component='div'>
-          หัวข้อกิจกรรมเด่น
+          {title}
+          <TimeShow times={createdAt} />
         </Typography>
+
         <Typography variant='body1' sx={{ color: 'text.secondary' }}>
-          Giving young leaders an opportunity to grow and learn how to lead in
-          their communities is critical to the long-term success of t
-          curriculum.
+          {markdownContent}
         </Typography>
       </CardContent>
       <CardActions>
         <Button
           size='small'
           variant='text'
+          component={Link}
+          href={`/blog/${id}`}
           endIcon={<ArrowForward />}
           color='secondary'
         >

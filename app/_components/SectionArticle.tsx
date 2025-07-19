@@ -1,11 +1,24 @@
 import { Grid2 as Grid, Pagination, Paper, Typography } from '@mui/material';
 import React from 'react';
 import ContainerSection from './ContainerSection';
-import Article from './Article';
+import ArticleContent from './ArticleContent';
 
-export default function SectionEmployment() {
+type SearchParams = {
+  page?: string;
+  size?: string;
+};
+
+interface Props {
+  searchParams: SearchParams;
+}
+
+export default function SectionArticle({ searchParams }: Props) {
   return (
-    <ContainerSection isMaxContent={true} isSecoundColor={true}>
+    <ContainerSection
+      id='article-section'
+      isMaxContent={true}
+      isSecoundColor={true}
+    >
       <Grid container justifyContent='center' alignItems='start' size={12}>
         <Grid size={{ xs: 12, md: 10 }}>
           <Paper
@@ -28,14 +41,7 @@ export default function SectionEmployment() {
               >
                 <Pagination size='small' color='secondary' count={10} />
               </Grid>
-              {Array.from({ length: 10 }).map((_, index) => (
-                <Grid key={index} size={{ xs: 12, md: 6 }}>
-                  <Article />
-                </Grid>
-              ))}
-              <Grid container justifyContent='center' size={12}>
-                <Pagination size='small' color='secondary' count={10} />
-              </Grid>
+              <ArticleContent searchParams={searchParams} />
             </Grid>
           </Paper>
         </Grid>

@@ -2,11 +2,7 @@ import { Box, Grid2 as Grid, IconButton, Typography } from '@mui/material';
 import { GRADIENT_BG } from '../theme';
 import Image from 'next/image';
 
-import {
-  CONTACT_INFO,
-  LOCATION_INFO,
-  SOCIAL_LINKS,
-} from '@/app/const/constants';
+import { CONTACT_INFO, LOCATION_INFO, SOCIAL_LINKS } from '@/app/constants';
 import Link from 'next/link';
 
 export default function Footer() {

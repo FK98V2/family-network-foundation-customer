@@ -1,31 +1,33 @@
 'use client';
-import { Box, Grid2 as Grid, IconButton, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Grid2 as Grid,
+  IconButton,
+  Typography,
+} from '@mui/material';
 import React from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { GRADIENT_BG } from '../theme';
 import { useSlideShow } from '@/app/_hooks/useSlideShow';
+import { Annoucement } from '@/app/type';
+import TimeShow from './TimeShow';
+import Link from 'next/link';
 
-const slides = [
-  {
-    title: '"รวมพลังครอบครัว\nสร้างสังคมอบอุ่นไปด้วยกัน"',
-    description: `มูลนิธิเครือข่ายครอบครัว มีบทบาทในการประสานและสร้างความตระหนักในการส่งเสริมสถาบันครอบครัวให้เกิดขึ้นทั้งในบุคคล ชุมชน และสังคม ด้วยการนำเสนอกระบวนการรวมกลุ่มเป็นเครือข่ายความร่วมมือ ช่วยเหลือเกื้อกูลกันและเรียกร้องต่อรองสิทธิอันพึงมีของครอบครัว พันธกิจที่สำคัญของเราคือ ส่งเสริมให้พ่อแม่ใช้โอกาสเป็นพ่อแม่ของตนอย่างมีคุณค่า เพื่อทำหน้าที่ยิ่งใหญ่ให้ประสบผลสำเร็จนั่นคือหน้าที่ของความเป็นพ่อแม่นั่นเอง`,
-  },
-  {
-    title: 'ข่าวประชาสัมพันธ์',
-    description: 'ข่าวประชาสัมพันธ์ของมูลนิธิเครือข่ายครอบครัว',
-  },
-  {
-    title: 'ข่าวประชาสัมพันธ์',
-    description: 'ข่าวประชาสัมพันธ์ของมูลนิธิเครือข่ายครอบครัว',
-  },
-  {
-    title: 'ข่าวประชาสัมพันธ์',
-    description: 'ข่าวประชาสัมพันธ์ของมูลนิธิเครือข่ายครอบครัว',
-  },
-];
+interface Props {
+  items: Annoucement[];
+  showIntroduce?: boolean;
+}
 
-export default function BoxSlide() {
+export default function BoxSlide({ items, showIntroduce = false }: Props) {
+  const introduce: Partial<Annoucement> = {
+    title: '“รวมพลังครอบครัว สร้างสังคมอบอุ่นไปด้วยกัน”',
+    description:
+      'มูลนิธิเครือข่ายครอบครัว มีบทบาทในการประสานและสร้างความตระหนักในการส่งเสริมสถาบันครอบครัวให้เกิดขึ้นทั้งในบุคคล ชุมชน และสังคม ด้วยการนำเสนอกระบวนการรวมกลุ่มเป็นเครือข่ายความร่วมมือ ช่วยเหลือเกื้อกูลกันและเรียกร้องต่อรองสิทธิอันพึงมีของครอบครัว  พันธกิจที่สำคัญของเราคือ ส่งเสริมให้พ่อแม่ใช้โอกาสเป็นพ่อแม่ของตนอย่างมีคุณค่า เพื่อทำหน้าที่ยิ่งใหญ่ให้ประสบผลสำเร็จนั่นคือหน้าที่ของความเป็นพ่อแม่นั่นเอง',
+  };
+
+  const displayItems = showIntroduce ? [introduce, ...items] : items;
   const {
     currentSlide,
     getSlidePosition,
@@ -33,17 +35,18 @@ export default function BoxSlide() {
     handleNextSlide,
     stopAutoPlay,
   } = useSlideShow({
-    totalSlides: slides.length,
+    totalSlides: displayItems.length || 0,
     intervalSeconds: 5,
-    gapPixels: 30,
   });
+
+  if (!displayItems.length) return null;
 
   return (
     <Grid size={{ xs: 12, md: 4 }} container>
       <Grid
         px='25px'
         py='36px'
-        height='534px'
+        height='100%'
         sx={{
           background: GRADIENT_BG,
           position: 'relative',
@@ -59,25 +62,46 @@ export default function BoxSlide() {
             transform: `translateX(${getSlidePosition(currentSlide)}%)`,
             transition: 'transform 0.5s ease-in-out',
             display: 'flex',
-            width: 'calc(100%)',
-            gap: '30px',
+            width: '100%',
           }}
         >
-          {slides.map((slide, index) => (
+          {displayItems?.map((announcement, index) => (
             <Grid
               key={index}
               sx={{
                 width: '100%',
                 flex: 'none',
-                pr: '20px',
+                height: 'auto',
               }}
+              px={'30px'}
+              container
+              alignItems='center'
+              spacing={2}
             >
-              <Typography variant='h2' whiteSpace='pre-line'>
-                {slide.title}
-              </Typography>
-              <Typography variant='body1' mt={2}>
-                {slide.description}
-              </Typography>
+              <Grid size={12}>
+                <Typography variant='h2' whiteSpace='pre-line'>
+                  {announcement?.title}
+                  {announcement?.createdAt && (
+                    <TimeShow times={announcement.createdAt} />
+                  )}
+                </Typography>
+                <Typography variant='body1' mt={2}>
+                  {announcement.description}
+                </Typography>
+              </Grid>
+              {announcement.link && (
+                <Grid>
+                  <Button
+                    component={Link}
+                    target='_blank'
+                    href={announcement.link}
+                    variant='contained'
+                    color='secondary'
+                  >
+                    อ่านเพิ่มเติม
+                  </Button>
+                </Grid>
+              )}
             </Grid>
           ))}
         </Grid>
@@ -88,9 +112,8 @@ export default function BoxSlide() {
           alignItems='center'
           size={12}
         >
-          {/* Pagination dots */}
           <Grid display='flex' gap={1}>
-            {slides.map((_, index) => (
+            {displayItems?.map((_, index) => (
               <Box
                 key={index}
                 sx={{
@@ -104,7 +127,6 @@ export default function BoxSlide() {
             ))}
           </Grid>
 
-          {/* Navigation buttons */}
           <Grid>
             <IconButton
               color='secondary'

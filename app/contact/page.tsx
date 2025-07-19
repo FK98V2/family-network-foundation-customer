@@ -1,6 +1,6 @@
 import HeadSection from '../_components/HeadSection';
 import SectionLocation from '../_components/SectionLocation';
-import { HEAD_SECTION_CONTACT } from '../const/constants';
+import { HEAD_SECTION_CONTACT } from '../constants';
 
 export default function Contact() {
   return (

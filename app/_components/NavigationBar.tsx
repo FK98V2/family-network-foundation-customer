@@ -2,7 +2,7 @@
 import { Typography } from '@mui/material';
 import { Link } from '@mui/material';
 import React from 'react';
-import { MENU_ITEMS } from '../const/constants';
+import { MENU_ITEMS } from '../constants';
 import { usePathname } from 'next/navigation';
 
 export default function NavigationBar() {

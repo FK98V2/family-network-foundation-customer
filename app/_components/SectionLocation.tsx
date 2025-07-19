@@ -42,13 +42,7 @@ export default function SectionLocation() {
             <AccessTimeFilled sx={{ color: 'secondary.light' }} />
             <Box display='flex' flexDirection='column' gap={1}>
               <Typography variant='body1' gutterBottom>
-                วันจันทร์ 9:00 - 19:00
-              </Typography>
-              <Typography variant='body1' gutterBottom>
-                วันจันทร์ 9:00 - 19:00
-              </Typography>
-              <Typography variant='body1' gutterBottom>
-                วันจันทร์ 9:00 - 19:00
+                วันจันทร์ - ศุกร์ 9.00-16.00 น.
               </Typography>
             </Box>
           </Box>

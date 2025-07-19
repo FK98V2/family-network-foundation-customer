@@ -6,15 +6,18 @@ interface Props {
   children: React.ReactNode;
   isSecoundColor?: boolean;
   isMaxContent?: boolean;
+  id?: string;
 }
 
 export default function ContainerSection({
   children,
   isSecoundColor,
   isMaxContent = false,
+  id,
 }: Props) {
   return (
     <Grid
+      id={id}
       sx={{
         background: isSecoundColor ? GRADIENT_BG : 'white',
       }}

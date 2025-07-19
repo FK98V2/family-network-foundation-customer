@@ -1,7 +1,7 @@
 import { Button, Grid2 as Grid, Link } from '@mui/material';
 import { Typography } from '@mui/material';
 import ContainerSection from './ContainerSection';
-import CardActivity from './CardActivity';
+import InfoGraphsRecent from './InfoGraphsRecent';
 
 export default function SectionInfoGraphRecent() {
   return (
@@ -17,11 +17,7 @@ export default function SectionInfoGraphRecent() {
         </Typography>
       </Grid>
       <Grid container size={12} spacing={2}>
-        {Array.from({ length: 6 }).map((_, index) => (
-          <Grid key={index} size={{ xs: 12, md: 4 }}>
-            <CardActivity />
-          </Grid>
-        ))}
+        <InfoGraphsRecent />
         <Grid container justifyContent='center' size={12}>
           <Button
             component={Link}

@@ -2,20 +2,20 @@
 import { Box } from '@mui/material';
 import React from 'react';
 import { useInfiniteScroll } from '@/app/_hooks/useInfiniteScroll';
-import { CardActivity as CardActivityType } from '../type';
 import CardActivity from './CardActivity';
+import { Activity } from '../type';
 
 interface Props {
   animationDuration?: number;
-  items?: CardActivityType[];
+  items?: Activity[];
 }
 
 export default function AnimationSlideAutoCard({
   animationDuration = 40,
+  items,
 }: Props) {
   const { containerRef, scrollRef } = useInfiniteScroll();
-  const items = Array.from({ length: 24 });
-  const doubledItems = [...items, ...items];
+  const doubledItems = [...(items || []), ...(items || [])];
 
   return (
     <Box
@@ -53,9 +53,9 @@ export default function AnimationSlideAutoCard({
           },
         }}
       >
-        {doubledItems.map((_, index) => (
+        {doubledItems.map((item, index) => (
           <Box key={index} width={{ xs: '250px', md: '425px' }}>
-            <CardActivity />
+            <CardActivity {...item} />
           </Box>
         ))}
       </Box>

@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import CloseIcon from '@mui/icons-material/Close';
-import { CONTACT_INFO, SOCIAL_LINKS } from '../const/constants';
+import { CONTACT_INFO, SOCIAL_LINKS } from '../constants';
 import NavigationBar from './NavigationBar';
 
 interface SidebarMenuProps {

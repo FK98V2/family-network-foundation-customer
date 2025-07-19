@@ -1,7 +1,7 @@
 import { Grid2 as Grid, Typography } from '@mui/material';
 import AnimationSlidePagination from './AnimationSlidePagination';
 import Objective from './Objective';
-import { OBJECTIVES } from '../const/constants';
+import { OBJECTIVES } from '../constants';
 import ContainerSection from './ContainerSection';
 
 export default function SectionObjective() {

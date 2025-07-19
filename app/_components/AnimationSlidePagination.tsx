@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Objective from './Objective';
 import { useSwipeablePages } from '@/app/_hooks/useSwipeablePages';
 import { useAutoSlide } from '@/app/_hooks/useAutoSlide';
-import { OBJECTIVES } from '@/app/const/constants';
+import { OBJECTIVES } from '@/app/constants';
 
 const AUTO_SLIDE_INTERVAL_SECONDS = 5;
 const ITEMS_PER_PAGE = 3;

@@ -2,7 +2,7 @@ import { Grid2 as Grid, Typography } from '@mui/material';
 import React from 'react';
 import CardCommetee from './CardCommetee';
 import ContainerSection from './ContainerSection';
-import { COMMITTEE_MEMBERS } from '../const/constants';
+import { COMMITTEE_MEMBERS } from '../constants';
 
 export default function SectionCommetee() {
   return (
