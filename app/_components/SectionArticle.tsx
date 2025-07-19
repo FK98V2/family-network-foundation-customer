@@ -3,11 +3,13 @@ import React from 'react';
 import ContainerSection from './ContainerSection';
 import ArticleContent from './ArticleContent';
 
+type SearchParams = {
+  page?: string;
+  size?: string;
+};
+
 interface Props {
-  searchParams: {
-    page?: string;
-    size?: string;
-  };
+  searchParams: SearchParams;
 }
 
 export default function SectionArticle({ searchParams }: Props) {
