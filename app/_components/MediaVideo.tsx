@@ -35,7 +35,7 @@ export default function MediaVideo({ videos }: Props) {
           width='100%'
           height='100%'
           src={`https://www.youtube.com/embed/${
-            selectedVideo?.videoUrl
+            selectedVideo?.videoUrl.split('v=')[1]
           }?autoplay=1&mute=${isSelected ? 0 : 1}`}
           allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay;mute'
           allowFullScreen

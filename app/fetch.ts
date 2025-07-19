@@ -244,10 +244,17 @@ export async function getInfoGraphsShort(): Promise<
   }
 }
 
-export async function getVideos(): Promise<Response<Video[]>> {
+export async function getVideos(
+  params?: PaginationParams
+): Promise<ResponsePagination<Video[]>> {
   try {
+    const queryParams = new URLSearchParams({
+      page: (params?.page || 0).toString(),
+      size: (params?.size || 10).toString(),
+    }).toString();
+
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_CONTEXT_URL}/api/next/videos`,
+      `${process.env.NEXT_PUBLIC_CONTEXT_URL}/api/next/videos?${queryParams}`,
       {
         next: { revalidate: 60 },
       }
@@ -261,7 +268,15 @@ export async function getVideos(): Promise<Response<Video[]>> {
   } catch (error) {
     console.error('Error fetching videos:', error);
     return {
-      data: [],
+      data: {
+        content: [],
+        pagination: {
+          pageNumber: 0,
+          pageSize: 10,
+          totalElements: 0,
+          totalPages: 0,
+        },
+      },
       message: 'Failed to fetch videos',
       status: 500,
     };

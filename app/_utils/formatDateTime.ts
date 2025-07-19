@@ -74,3 +74,12 @@ export function formatThaiDateTime(timestamp: number | string): string {
   const minutes = date.getMinutes().toString().padStart(2, '0');
   return `${day} ${month} ${year} ${hours}:${minutes}`;
 }
+
+export function formatDuration(duration: number) {
+  const hours = Math.floor(duration / 3600);
+  const minutes = Math.floor((duration % 3600) / 60);
+  const seconds = duration % 60;
+  return `${hours > 0 ? `${hours} ชั่วโมง` : ''} ${
+    minutes > 0 ? `${minutes} นาที` : ''
+  } ${seconds > 0 ? `${seconds} วินาที` : ''}`;
+}

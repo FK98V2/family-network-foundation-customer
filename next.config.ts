@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       'upload.wikimedia.org',
       'i.ytimg.com',
       'example.com',
+      '147.50.231.164',
     ], // อนุญาต hostname ของรูปภาพ
     remotePatterns: [
       {
