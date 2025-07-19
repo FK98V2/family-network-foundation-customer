@@ -9,27 +9,8 @@ export async function GET(
   const pageSize = searchParams.get('size') || '10';
 
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-    if (!apiUrl) {
-      console.warn('NEXT_PUBLIC_API_URL not configured, returning empty data');
-      return NextResponse.json({
-        data: {
-          content: [],
-          pagination: {
-            pageNumber: parseInt(pageNumber) || 0,
-            pageSize: parseInt(pageSize) || 10,
-            totalElements: 0,
-            totalPages: 0,
-          },
-        },
-        message: 'API URL not configured',
-        status: 200,
-      });
-    }
-
     const response = await fetch(
-      `${apiUrl}/api/v1/procurements?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/procurements?pageNumber=${pageNumber}&pageSize=${pageSize}`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -37,10 +18,6 @@ export async function GET(
         cache: 'no-store',
       }
     );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
 
     const data = await response.json();
     return NextResponse.json(data);

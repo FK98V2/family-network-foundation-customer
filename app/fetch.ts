@@ -11,46 +11,17 @@ import {
   Video,
 } from './type';
 
-// Helper function to get base URL with fallback
-function getBaseUrl(): string {
-  if (typeof window !== 'undefined') {
-    // Client-side
-    return window.location.origin;
-  }
-
-  // Server-side
-  const contextUrl = process.env.NEXT_PUBLIC_CONTEXT_URL;
-  if (contextUrl) {
-    return contextUrl;
-  }
-
-  // Fallback during build time
-  return 'http://localhost:3000';
-}
-
-// Helper function to handle fetch errors gracefully during build
-async function safeFetch(
-  url: string,
-  options?: RequestInit
-): Promise<globalThis.Response | null> {
-  try {
-    const response = await fetch(url, options);
-    return response.ok ? response : null;
-  } catch (error) {
-    console.warn(`Fetch failed for ${url}:`, error);
-    return null;
-  }
-}
-
 export async function getActivitiesHighlight(): Promise<Response<Activity[]>> {
   try {
-    const baseUrl = getBaseUrl();
-    const res = await safeFetch(`${baseUrl}/api/next/activities/highlight`, {
-      next: { revalidate: 60 },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CONTEXT_URL}/api/next/activities/highlight`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
 
-    if (!res) {
-      throw new Error('Failed to fetch');
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     return res.json();
@@ -68,13 +39,15 @@ export async function getActivitiesShort(): Promise<
   ResponsePagination<Activity[]>
 > {
   try {
-    const baseUrl = getBaseUrl();
-    const res = await safeFetch(`${baseUrl}/api/next/activities/short`, {
-      next: { revalidate: 60 },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CONTEXT_URL}/api/next/activities/short`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
 
-    if (!res) {
-      throw new Error('Failed to fetch');
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     return res.json();
@@ -105,16 +78,15 @@ export async function getActivities(
       size: (params?.size || 10).toString(),
     }).toString();
 
-    const baseUrl = getBaseUrl();
-    const res = await safeFetch(
-      `${baseUrl}/api/next/activities?${queryParams}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CONTEXT_URL}/api/next/activities?${queryParams}`,
       {
         next: { revalidate: 60 },
       }
     );
 
-    if (!res) {
-      throw new Error('Failed to fetch');
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     return res.json();
@@ -138,13 +110,15 @@ export async function getActivities(
 
 export async function getAnnoucement(): Promise<Response<Annoucement[]>> {
   try {
-    const baseUrl = getBaseUrl();
-    const res = await safeFetch(`${baseUrl}/api/next/annoucements`, {
-      next: { revalidate: 60 },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CONTEXT_URL}/api/next/annoucements`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
 
-    if (!res) {
-      throw new Error('Failed to fetch');
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     return res.json();
@@ -167,16 +141,15 @@ export async function getProcurements(
       size: (params?.size || 10).toString(),
     }).toString();
 
-    const baseUrl = getBaseUrl();
-    const res = await safeFetch(
-      `${baseUrl}/api/next/procurements?${queryParams}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CONTEXT_URL}/api/next/procurements?${queryParams}`,
       {
         next: { revalidate: 60 },
       }
     );
 
-    if (!res) {
-      throw new Error('Failed to fetch');
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     return res.json();
@@ -207,16 +180,15 @@ export async function getInfoGraphs(
       size: (params?.size || 10).toString(),
     }).toString();
 
-    const baseUrl = getBaseUrl();
-    const res = await safeFetch(
-      `${baseUrl}/api/next/infographs?${queryParams}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CONTEXT_URL}/api/next/infographs?${queryParams}`,
       {
         next: { revalidate: 60 },
       }
     );
 
-    if (!res) {
-      throw new Error('Failed to fetch');
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     return res.json();
@@ -242,13 +214,15 @@ export async function getInfoGraphsShort(): Promise<
   ResponsePagination<InfoGraphic[]>
 > {
   try {
-    const baseUrl = getBaseUrl();
-    const res = await safeFetch(`${baseUrl}/api/next/infographs/short`, {
-      next: { revalidate: 60 },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CONTEXT_URL}/api/next/infographs/short`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
 
-    if (!res) {
-      throw new Error('Failed to fetch');
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     return res.json();
@@ -272,13 +246,15 @@ export async function getInfoGraphsShort(): Promise<
 
 export async function getVideos(): Promise<Response<Video[]>> {
   try {
-    const baseUrl = getBaseUrl();
-    const res = await safeFetch(`${baseUrl}/api/next/videos`, {
-      next: { revalidate: 60 },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CONTEXT_URL}/api/next/videos`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
 
-    if (!res) {
-      throw new Error('Failed to fetch');
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     return res.json();
@@ -301,13 +277,15 @@ export async function getArticles(
       size: (params?.size || 10).toString(),
     }).toString();
 
-    const baseUrl = getBaseUrl();
-    const res = await safeFetch(`${baseUrl}/api/next/articles?${queryParams}`, {
-      next: { revalidate: 60 },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CONTEXT_URL}/api/next/articles?${queryParams}`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
 
-    if (!res) {
-      throw new Error('Failed to fetch');
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     return res.json();
@@ -331,13 +309,15 @@ export async function getArticles(
 
 export async function getBlog(id: string): Promise<Response<Blog>> {
   try {
-    const baseUrl = getBaseUrl();
-    const res = await safeFetch(`${baseUrl}/api/next/blogs/${id}`, {
-      next: { revalidate: 60 },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CONTEXT_URL}/api/next/blogs/${id}`,
+      {
+        next: { revalidate: 60 },
+      }
+    );
 
-    if (!res) {
-      throw new Error('Failed to fetch');
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     return res.json();

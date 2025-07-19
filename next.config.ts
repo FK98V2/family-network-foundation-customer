@@ -5,9 +5,10 @@ const nextConfig: NextConfig = {
     domains: [
       '27.254.134.159',
       'upload.wikimedia.org',
+      'upload.wikimedia.org',
       'i.ytimg.com',
       'example.com',
-    ],
+    ], // อนุญาต hostname ของรูปภาพ
     remotePatterns: [
       {
         protocol: 'http',
@@ -17,29 +18,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Configure webpack to properly handle MUI and other dependencies
-  webpack: (config, { isServer }) => {
-    // Don't externalize MUI on server side
-    if (isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false,
-      };
-    }
-    return config;
-  },
-  // Remove or adjust serverExternalPackages - don't externalize MUI
-  serverExternalPackages: [],
-  // Ensure proper transpilation of MUI packages
-  transpilePackages: [
-    '@mui/material',
-    '@mui/icons-material',
-    '@mui/x-date-pickers',
-    '@emotion/react',
-    '@emotion/styled',
-  ],
 };
 
 export default nextConfig;
