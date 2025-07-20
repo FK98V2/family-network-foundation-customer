@@ -12,10 +12,6 @@ pipeline {
         stage('Checkout code') {
             steps {
                 checkout scm
-                sh '''
-                    git checkout main
-                    git pull origin main
-                '''
             }
         }
 
