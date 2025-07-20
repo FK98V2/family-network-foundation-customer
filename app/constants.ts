@@ -107,22 +107,22 @@ export const COMMITTEE_MEMBERS = [
   {
     name: 'แพทย์หญิง พรรณพิมล วิปุลากร',
     position: 'ประธานกรรมการ',
-    image: '/showCaseMock/img-card.svg',
+    image: '/committee/p-1.png',
   },
   {
     name: 'นางสาว จิตตินันท์ เดชะคุปต์',
     position: 'รองประธานกรรมการ',
-    image: '/showCaseMock/img-card.svg',
+    image: '/committee/p-2.png',
   },
   {
     name: 'นางสาว พัชรา อุบลสวัสดิ์',
     position: 'กรรมการและเหรัญญิก',
-    image: '/showCaseMock/img-card.svg',
+    image: '/committee/p-3.png',
   },
   {
     name: 'นาง อำนวยพร เอี่ยมพันธ์',
     position: 'กรรมการและเลขานุการ',
-    image: '/showCaseMock/img-card.svg',
+    image: '/committee/p-4.png',
   },
   {
     name: 'นางสาว อุทุมพร อินทจักร์',
@@ -132,11 +132,44 @@ export const COMMITTEE_MEMBERS = [
   {
     name: 'นางสาว ปิยะธิดา ขจรชัยกุล',
     position: 'กรรมการ',
-    image: '/showCaseMock/img-card.svg',
+    image: '/committee/p-6.png',
   },
   {
     name: 'นางสาว กนกวรรณ รับพรดี',
     position: 'กรรมการ',
     image: '/showCaseMock/img-card.svg',
+  },
+];
+
+export const ANIMATION_SLIDE_AUTO = [
+  {
+    image: '/introduce/introduce-1.jpg',
+  },
+  {
+    image: '/introduce/introduce-2.jpg',
+  },
+  {
+    image: '/introduce/introduce-3.jpg',
+  },
+  {
+    image: '/introduce/introduce-4.jpg',
+  },
+  {
+    image: '/introduce/introduce-5.jpg',
+  },
+  {
+    image: '/introduce/introduce-6.jpg',
+  },
+  {
+    image: '/introduce/introduce-7.jpg',
+  },
+  {
+    image: '/introduce/introduce-8.jpg',
+  },
+  {
+    image: '/introduce/introduce-9.jpg',
+  },
+  {
+    image: '/introduce/introduce-10.jpg',
   },
 ];

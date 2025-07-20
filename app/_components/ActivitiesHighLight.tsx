@@ -9,7 +9,7 @@ export default async function ActivitiesHighLight() {
 
   if (!activities?.length) return <ComingSoon />;
   return (
-    <Grid container spacing={4} my='40px'>
+    <Grid container size={12} spacing={4} my='40px'>
       {activities.slice(0, 3).map((activity, index) => (
         <Grid
           key={activity.id || index}

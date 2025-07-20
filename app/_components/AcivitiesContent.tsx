@@ -33,7 +33,11 @@ export default async function ShowAllContent({ searchParams, type }: Props) {
       </Grid>
       <Grid container spacing={2} size={12}>
         {content.map((item) => (
-          <Grid key={item.id} size={{ xs: 12, md: 4 }}>
+          <Grid
+            minHeight={{ xs: '496px', md: '637px' }}
+            key={item.id}
+            size={{ xs: 12, md: 4 }}
+          >
             <CardActivity {...item} />
           </Grid>
         ))}

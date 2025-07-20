@@ -11,6 +11,7 @@ import { Activity, InfoGraphic } from '@/app/type';
 import mockCardImage from '@/public/showCaseMock/img-card.svg';
 import TimeShow from './TimeShow';
 import Link from 'next/link';
+import { truncateText } from '../_utils/formatHtml';
 
 export default function CardActivity({
   id,
@@ -19,6 +20,11 @@ export default function CardActivity({
   thumbnailUrl,
   createdAt,
 }: Activity | InfoGraphic) {
+  // สร้าง truncated content
+  const truncatedContent = React.useMemo(() => {
+    return truncateText(markdownContent, 200);
+  }, [markdownContent]);
+
   return (
     <Card
       sx={{
@@ -50,7 +56,7 @@ export default function CardActivity({
         </Typography>
 
         <Typography variant='body1' sx={{ color: 'text.secondary' }}>
-          {markdownContent}
+          {truncatedContent}
         </Typography>
       </CardContent>
       <CardActions>
