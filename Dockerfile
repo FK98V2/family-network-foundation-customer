@@ -34,7 +34,7 @@ COPY . .
 # ใช้ uid/gid เดียวกับ user node เพื่อเลี่ยง permission error
 RUN chown -R node:node /app
 USER node
-RUN npm run build          # <—  สร้าง .next (standalone หรือ full)
+RUN npm run build         
 
 ###########################
 # Stage 3 : runtime
@@ -44,9 +44,6 @@ WORKDIR /app
 ENV NODE_ENV=production
 USER node
 
-# Runtime environment variables
-ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-https://family-network.or.th/api/v1}
-ENV NEXT_PUBLIC_CONTEXT_URL=${NEXT_PUBLIC_CONTEXT_URL:-https://family-network.or.th}
 
 # copy ของที่ runtime ต้องใช้จาก builder
 COPY --from=builder --chown=node:node /app/public ./public
