@@ -19,6 +19,13 @@ WORKDIR /app
 # ใช้ root เพื่อจัดการ permission ก่อนค่อยสลับ user ตอน build
 USER root
 
+# Build-time environment variables
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_CONTEXT_URL
+# Pass build ARGs as ENV vars for Next.js build process
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ENV NEXT_PUBLIC_CONTEXT_URL=${NEXT_PUBLIC_CONTEXT_URL}
+
 # ดึง node_modules มาจาก deps
 COPY --from=deps /app/node_modules ./node_modules
 # ดึง source code
@@ -36,6 +43,10 @@ FROM node:18-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 USER node
+
+# Runtime environment variables
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-https://family-network.or.th/api/v1}
+ENV NEXT_PUBLIC_CONTEXT_URL=${NEXT_PUBLIC_CONTEXT_URL:-https://family-network.or.th}
 
 # copy ของที่ runtime ต้องใช้จาก builder
 COPY --from=builder --chown=node:node /app/public ./public

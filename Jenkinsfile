@@ -4,6 +4,8 @@ pipeline {
     environment {
         APP_DIR   = '/srv/family-new/family-network-foundation-customer'
         STACK_DIR = '/srv/family-new'
+        NEXT_PUBLIC_API_URL = 'https://family-network.or.th/api/v1'
+        NEXT_PUBLIC_CONTEXT_URL = 'https://family-network.or.th'
     }
 
     stages {
@@ -20,7 +22,10 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh '''
-                    docker build -t family-customer:local .
+                    docker build \
+                      --build-arg NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL} \
+                      --build-arg NEXT_PUBLIC_CONTEXT_URL=${NEXT_PUBLIC_CONTEXT_URL} \
+                      -t family-customer:local .
                 '''
             }
         }
