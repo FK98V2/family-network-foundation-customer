@@ -127,7 +127,7 @@ export const COMMITTEE_MEMBERS = [
   {
     name: 'นางสาว อุทุมพร อินทจักร์',
     position: 'กรรมการ',
-    image: '/showCaseMock/img-card.svg',
+    image: '/committee/temp.png',
   },
   {
     name: 'นางสาว ปิยะธิดา ขจรชัยกุล',
@@ -137,7 +137,7 @@ export const COMMITTEE_MEMBERS = [
   {
     name: 'นางสาว กนกวรรณ รับพรดี',
     position: 'กรรมการ',
-    image: '/showCaseMock/img-card.svg',
+    image: '/committee/temp.png',
   },
 ];
 
