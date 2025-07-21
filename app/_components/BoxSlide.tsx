@@ -80,7 +80,8 @@ export default function BoxSlide({ items, showIntroduce = false }: Props) {
             >
               <Grid size={12}>
                 <Typography variant='h2' whiteSpace='pre-line'>
-                  ข่าวสาร : {announcement?.title}
+                  {showIntroduce && index === 0 ? '' : 'ข่าวสาร'}:{' '}
+                  {announcement?.title}
                   {announcement?.createdAt && (
                     <TimeShow times={announcement.createdAt} />
                   )}
