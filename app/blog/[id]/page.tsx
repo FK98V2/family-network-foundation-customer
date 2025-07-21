@@ -33,17 +33,19 @@ export default async function Blog({ params }: Props) {
           </Typography>
         </Grid>
         <Grid container justifyContent='center' size={12}>
-          <Box position='relative' width='100%' height='425px'>
-            <Image
-              src={thumbnailUrl}
-              alt='activity'
-              fill
-              style={{
-                objectFit: 'cover',
-                objectPosition: 'start',
-              }}
-            />
-          </Box>
+          {thumbnailUrl && (
+            <Box position='relative' width='100%' height='600px'>
+              <Image
+                src={thumbnailUrl}
+                alt='activity'
+                fill
+                style={{
+                  objectFit: 'contain',
+                  objectPosition: 'start',
+                }}
+              />
+            </Box>
+          )}
         </Grid>
         <Grid size={12}>
           <Typography variant='h6'>{parse(markdownContent)}</Typography>

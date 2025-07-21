@@ -87,6 +87,7 @@ export interface Blog {
   thumbnailUrl: string;
   attachments: Attachment[];
   createdAt: number;
+  type: 'INFO_GRAPHIC' | 'ACTIVITY' | 'FOUNDATION';
 }
 
 export interface Attachment {
