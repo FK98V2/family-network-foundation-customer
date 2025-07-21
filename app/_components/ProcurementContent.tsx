@@ -7,7 +7,7 @@ import ComingSoon from './ComingSoon';
 export default async function ProcurementContent() {
   const { data: procurements } = await getProcurements({ page: 0, size: 10 });
 
-  if (!procurements.content.length) {
+  if (!procurements?.content || !procurements.content.length) {
     return <ComingSoon />;
   }
   return (
