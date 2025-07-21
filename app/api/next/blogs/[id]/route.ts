@@ -27,6 +27,7 @@ export async function GET(
         data: {
           id: 0,
           title: '',
+          type: 'INFO_GRAPHIC',
           markdownContent: '',
           thumbnailUrl: '',
           attachments: [],

@@ -341,6 +341,7 @@ export async function getBlog(id: string): Promise<Response<Blog>> {
     return {
       data: {
         id: 0,
+        type: 'INFO_GRAPHIC',
         title: 'ไม่พบบทความ',
         markdownContent: 'ขออภัย ไม่สามารถโหลดบทความได้ในขณะนี้',
         thumbnailUrl: '',
