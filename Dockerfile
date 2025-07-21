@@ -22,9 +22,9 @@ USER root
 # Build-time environment variables
 ARG NEXT_PUBLIC_API_URL
 ARG NEXT_PUBLIC_CONTEXT_URL
-# Pass build ARGs as ENV vars for Next.js build process
-ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
-ENV NEXT_PUBLIC_CONTEXT_URL=${NEXT_PUBLIC_CONTEXT_URL}
+# Pass build ARGs as ENV vars for Next.js build process 
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:https://family-network.or.th/api/v1}
+ENV NEXT_PUBLIC_CONTEXT_URL=${NEXT_PUBLIC_CONTEXT_URL:https://family-network.or.th}
 
 # ดึง node_modules มาจาก deps
 COPY --from=deps /app/node_modules ./node_modules
