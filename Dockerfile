@@ -34,7 +34,7 @@ COPY . .
 # ใช้ uid/gid เดียวกับ user node เพื่อเลี่ยง permission error
 RUN chown -R node:node /app
 USER node
-RUN npm run build         
+RUN yarn build         
 
 ###########################
 # Stage 3 : runtime
@@ -53,4 +53,4 @@ COPY --from=builder --chown=node:node /app/package.json ./package.json
 COPY --from=builder --chown=node:node /app/next.config.ts ./next.config.ts
 
 EXPOSE 3000
-CMD ["npm","start"]     
+CMD ["yarn","start"]     
