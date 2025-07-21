@@ -1,20 +1,23 @@
 'use client';
 import { Box, SxProps } from '@mui/material';
 import React from 'react';
-import AliveLogo from './AliveLogo';
 import { useInfiniteScroll } from '@/app/_hooks/useInfiniteScroll';
+import Image from 'next/image';
 
 interface Props {
   animationDuration?: number;
   itemsSx?: SxProps;
+  items?: {
+    image: string;
+  }[];
 }
 
 export default function AnimationSlideAuto({
   animationDuration = 40,
   itemsSx,
+  items = [],
 }: Props) {
   const { containerRef, scrollRef } = useInfiniteScroll();
-  const items = Array.from({ length: 20 });
   const doubledItems = [...items, ...items];
 
   return (
@@ -53,14 +56,21 @@ export default function AnimationSlideAuto({
           },
         }}
       >
-        {doubledItems.map((_, index) => (
+        {doubledItems.map((item, index) => (
           <Box
             key={index}
             sx={{
               flex: 'none',
             }}
           >
-            <AliveLogo sx={itemsSx} />
+            <Box position='relative' sx={itemsSx}>
+              <Image
+                src={item.image}
+                alt='img'
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            </Box>
           </Box>
         ))}
       </Box>

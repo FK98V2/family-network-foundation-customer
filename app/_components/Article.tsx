@@ -1,9 +1,10 @@
 import { ArticleOutlined } from '@mui/icons-material';
 import { Button, Divider, Typography } from '@mui/material';
 import { Grid2 as Grid } from '@mui/material';
-import React from 'react';
+import React, { useMemo } from 'react';
 import TimeShow from './TimeShow';
 import Link from 'next/link';
+import { truncateText } from '../_utils/formatHtml';
 
 interface Props {
   id: number;
@@ -19,6 +20,10 @@ export default function Article({
   markdownContent,
   createdAt,
 }: Props) {
+  const truncatedContent = useMemo(
+    () => truncateText(markdownContent, 200),
+    [markdownContent]
+  );
   return (
     <Grid container direction='column' size={12}>
       <Divider sx={{ bgcolor: 'secondary.100' }} />
@@ -43,7 +48,7 @@ export default function Article({
         {title}
       </Button>
       <TimeShow times={createdAt} />
-      <Typography variant='body1'>{markdownContent}</Typography>
+      <Typography variant='body1'>{truncatedContent}</Typography>
     </Grid>
   );
 }

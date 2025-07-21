@@ -3,6 +3,7 @@ import { Grid2 as Grid } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
 import { Video } from '../type';
+import { formatDuration } from '../_utils/formatDateTime';
 
 interface Props {
   id: number;
@@ -72,7 +73,7 @@ export default function VideoTap({
         </Grid>
       </Grid>
       <Grid size={2}>
-        <Typography variant='body2'>{duration || '0'} นาที</Typography>
+        <Typography variant='body2'>{formatDuration(duration)}</Typography>
       </Grid>
     </Grid>
   );

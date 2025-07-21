@@ -17,7 +17,7 @@ export default function PlayVideoBtn() {
         onClick={handleOpen}
       >
         <Typography variant='body1' sx={{ textDecoration: 'underline' }}>
-          วิดีโอ 3:33 นาที
+          วิดีโอ 1:47 นาที
         </Typography>
       </Button>
       <Modal open={open} onClose={handleClose}>
@@ -38,7 +38,7 @@ export default function PlayVideoBtn() {
           <iframe
             width='100%'
             height='100%'
-            src='https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1'
+            src='https://www.youtube.com/embed/d5LvrTyNCts?autoplay=1'
             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay; microphone'
             allowFullScreen
           ></iframe>

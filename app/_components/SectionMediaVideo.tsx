@@ -7,8 +7,8 @@ import { getVideos } from '@/app/fetch';
 import ComingSoon from './ComingSoon';
 
 export default async function SectionMediaVideo() {
-  const { data: videos } = await getVideos();
-  if (!videos.length) return <ComingSoon />;
+  const { data: videos } = await getVideos({ page: 0, size: 100 });
+  if (!videos.content.length) return <ComingSoon />;
 
   return (
     <ContainerSection>
@@ -17,7 +17,7 @@ export default async function SectionMediaVideo() {
           คลิปบรรยากาศที่เล่าเรื่องมากกว่าคำพูด
         </Typography>
       </Grid>
-      <MediaVideo videos={videos} />
+      <MediaVideo videos={videos.content} />
     </ContainerSection>
   );
 }

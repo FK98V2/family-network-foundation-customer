@@ -24,7 +24,11 @@ export default async function ActivitiesRecent() {
   return (
     <>
       {activities.content.map((activity, index) => (
-        <Grid key={index} size={{ xs: 12, md: 4 }}>
+        <Grid
+          key={index}
+          size={{ xs: 12, md: 4 }}
+          minHeight={{ xs: '496px', md: '637px' }}
+        >
           <CardActivity {...activity} />
         </Grid>
       ))}

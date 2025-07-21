@@ -1,6 +1,7 @@
 import { Box, Grid2 as Grid, Typography } from '@mui/material';
 
 import AnimationSlideAuto from './AnimationSlideAuto';
+import { ANIMATION_SLIDE_AUTO } from '../constants';
 
 export default function SectionAlive() {
   return (
@@ -22,7 +23,10 @@ export default function SectionAlive() {
             เราภูมิใจที่ได้ร่วมงานกับพันธมิตรที่หลากหลายซึ่งมีจุดมุ่งหมายเดียวกันนั่นคือการเสริมสร้างความเข้มแข็งให้
             กับครอบครัว และยกระดับคุณภาพชีวิตของเด็กและเยาวชนในสังคมไทย
           </Typography>
-          <AnimationSlideAuto itemsSx={{ width: '100px', height: '100px' }} />
+          <AnimationSlideAuto
+            itemsSx={{ width: '100px', height: '100px' }}
+            items={ANIMATION_SLIDE_AUTO}
+          />
         </Box>
       </Grid>
     </Grid>

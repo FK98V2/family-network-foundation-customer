@@ -5,7 +5,7 @@ import ActivitiesRecent from './ActivitiesRecent';
 
 export default function SectionActivitiesRecent() {
   return (
-    <ContainerSection>
+    <ContainerSection isMaxContent={true}>
       <Grid size={12}>
         <Typography textAlign='center' variant='h2'>
           รวมทุกกิจกรรมจากเครือข่ายครอบครัว

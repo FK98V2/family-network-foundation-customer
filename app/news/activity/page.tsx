@@ -14,7 +14,7 @@ interface Props {
 export default async function NewsAcivity({ searchParams }: Props) {
   return (
     <>
-      <ContainerSection>
+      <ContainerSection isMaxContent={true}>
         <Grid size={12}>
           <Button
             component={Link}

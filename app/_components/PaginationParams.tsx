@@ -2,14 +2,14 @@
 
 import { Pagination } from '@mui/material';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 
 interface Props {
   totalPages: number;
   scrollToId?: string;
 }
 
-export default function PaginationParams({ totalPages, scrollToId }: Props) {
+function PaginationParamsInner({ totalPages, scrollToId }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pageNumber = Number(searchParams.get('page')) || 1;
@@ -48,5 +48,16 @@ export default function PaginationParams({ totalPages, scrollToId }: Props) {
       showFirstButton
       showLastButton
     />
+  );
+}
+
+// Wrapper component with Suspense boundary
+export default function PaginationParams({ totalPages, scrollToId }: Props) {
+  return (
+    <Suspense
+      fallback={<Pagination count={totalPages} color='secondary' disabled />}
+    >
+      <PaginationParamsInner totalPages={totalPages} scrollToId={scrollToId} />
+    </Suspense>
   );
 }
