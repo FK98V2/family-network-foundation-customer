@@ -18,10 +18,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh '''
-                    docker build \
-                      --build-arg NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL} \
-                      --build-arg NEXT_PUBLIC_CONTEXT_URL=${NEXT_PUBLIC_CONTEXT_URL} \
-                      -t family-customer:local .
+                    docker build -t family-customer:local .
                 '''
             }
         }
