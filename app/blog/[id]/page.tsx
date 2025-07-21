@@ -48,9 +48,11 @@ export default async function Blog({ params }: Props) {
         <Grid size={12}>
           <Typography variant='h6'>{parse(markdownContent)}</Typography>
         </Grid>
-        <Grid size={12}>
-          <Typography variant='h3'>ดาวน์โหลดไฟล์:</Typography>
-        </Grid>
+        {attachments.length > 0 && (
+          <Grid size={12}>
+            <Typography variant='h3'>ดาวน์โหลดไฟล์:</Typography>
+          </Grid>
+        )}
         <Grid size={12}>
           {attachments.map((attachment) => (
             <Button
