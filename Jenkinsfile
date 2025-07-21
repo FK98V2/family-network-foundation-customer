@@ -4,16 +4,14 @@ pipeline {
     environment {
         APP_DIR   = '/srv/family-new/family-network-foundation-customer'
         STACK_DIR = '/srv/family-new'
+        NEXT_PUBLIC_API_URL = 'https://family-network.or.th/api/v1'
+        NEXT_PUBLIC_CONTEXT_URL = 'https://family-network.or.th'
     }
 
     stages {
         stage('Checkout code') {
             steps {
                 checkout scm
-                sh '''
-                    git checkout main
-                    git pull origin main
-                '''
             }
         }
 

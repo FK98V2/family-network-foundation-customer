@@ -10,5 +10,5 @@ export default async function SectionAnnouncement({
   showIntroduce = false,
 }: Props) {
   const { data: announcements } = await getAnnoucement();
-  return <BoxSlide showIntroduce={showIntroduce} items={announcements} />;
+  return <BoxSlide showIntroduce={showIntroduce} items={announcements || []} />;
 }

@@ -6,7 +6,7 @@ import CardActivity from './CardActivity';
 export default async function ActivitiesRecent() {
   const { data: activities } = await getActivitiesShort();
 
-  if (!activities?.content)
+  if (!activities?.content || activities.content.length === 0)
     return (
       <Grid
         container
