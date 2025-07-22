@@ -22,7 +22,7 @@ export default function CardActivity({
 }: Activity | InfoGraphic) {
   // สร้าง truncated content
   const truncatedContent = React.useMemo(() => {
-    return truncateText(markdownContent, 200);
+    return truncateText(markdownContent, 150);
   }, [markdownContent]);
 
   return (
