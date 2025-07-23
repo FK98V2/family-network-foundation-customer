@@ -66,13 +66,19 @@ export function formatThaiTime(timestamp: number): string {
 }
 
 export function formatThaiDateTime(timestamp: number | string): string {
-  const date = new Date(timestamp);
-  const day = date.getDate().toString().padStart(2, '0');
+  const numericTimestamp =
+    typeof timestamp === 'string' ? parseInt(timestamp) : timestamp;
+
+  // Create date object in client's local timezone
+  const date = new Date(numericTimestamp);
+
+  // Use date-fns format with the date object (already in local timezone)
+  const day = format(date, 'dd');
   const month = thaiMonths[date.getMonth()];
   const year = date.getFullYear() + 543;
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  return `${day} ${month} ${year} ${hours}:${minutes}`;
+  const time = format(date, 'HH:mm');
+
+  return `${day} ${month} ${year} ${time}`;
 }
 
 export function formatDuration(duration: number) {
