@@ -1,4 +1,4 @@
-import { Grid2 as Grid } from '@mui/material';
+import { Grid2 as Grid, Link } from '@mui/material';
 import Image from 'next/image';
 
 import MobileMenu from './MobileMenu';
@@ -14,7 +14,13 @@ export default function Navbar() {
         bgcolor='primary.main'
         sx={{ xs: { px: 2 } }}
       >
-        <Grid display='flex' alignItems='center' size={{ xs: 6, md: 2 }}>
+        <Grid
+          component={Link}
+          href='/'
+          display='flex'
+          alignItems='center'
+          size={{ xs: 6, md: 2 }}
+        >
           <Image src='/logo.svg' alt='logo' width={100} height={100} />
         </Grid>
 
