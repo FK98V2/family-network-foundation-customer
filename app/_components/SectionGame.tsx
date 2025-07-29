@@ -1,7 +1,9 @@
-import { Grid2 as Grid, Typography } from '@mui/material';
+import { Button, Grid2 as Grid } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
 import ContainerSection from './ContainerSection';
+import Link from 'next/link';
+import { ArrowForward } from '@mui/icons-material';
 
 export default function SectionGame() {
   return (
@@ -12,11 +14,46 @@ export default function SectionGame() {
         container
         spacing={4}
       >
-        <Grid size={12} order={{ xs: 1, md: 2 }}>
-          <Typography textAlign='center' variant='h5' fontWeight='bold'>
+        <Grid
+          display='flex'
+          justifyContent='center'
+          alignItems='start'
+          size={12}
+          container
+          order={{ xs: 1, md: 2 }}
+        >
+          <Button
+            component={Link}
+            target='_blank'
+            variant='outlined'
+            color='secondary'
+            endIcon={
+              <ArrowForward sx={{ fontSize: '1rem', color: 'secondary' }} />
+            }
+            sx={{
+              fontWeight: 700,
+              fontSize: '1.2rem',
+              borderRadius: '10px',
+              textTransform: 'none',
+              animation: 'cloudFloat 3s ease-in-out infinite',
+              '@keyframes cloudFloat': {
+                '0%, 100%': {
+                  transform: 'translateY(0px)',
+                },
+                '50%': {
+                  transform: 'translateY(-8px)',
+                },
+              },
+              '&:hover': {
+                opacity: 0.8,
+                animation: 'cloudFloat 1.5s ease-in-out infinite',
+              },
+            }}
+            href='https://www.spatial.io/s/Electronic-Cigarette-Exhibition-6818ab89021e15e02d84b116?share=8112305362199440867'
+          >
             เล่นเกมสนุก <br />
             พร้อมเรียนรู้ภัยจากบุหรี่ไฟฟ้า
-          </Typography>
+          </Button>
         </Grid>
         <Grid
           height='300px'
