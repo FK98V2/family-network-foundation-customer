@@ -1,5 +1,5 @@
 pipeline {
-    agent any      
+    agent any
 
     options {
         skipDefaultCheckout(true)
@@ -10,7 +10,7 @@ pipeline {
         STACK_DIR = '/srv/family-new'
         DOCKER_BUILDKIT = '1'
         COMPOSE_DOCKER_CLI_BUILD = '1'
-        NEXT_PUBLIC_API_URL = 'https://family-network.or.th/api/v1'
+        NEXT_PUBLIC_API_URL = 'https://family-network.or.th'
         NEXT_PUBLIC_CONTEXT_URL = 'https://family-network.or.th'
     }
 
