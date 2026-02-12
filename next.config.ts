@@ -29,12 +29,32 @@ const nextConfig: NextConfig = {
   images: {
     domains: [
       '27.254.134.159',
+      'family-network.or.th',
       'upload.wikimedia.org',
       'i.ytimg.com',
       'example.com',
-      'family-network.or.th',
     ],
+    formats: ['image/webp'],
   },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
+    return config;
+  },
+  serverExternalPackages: [],
+  transpilePackages: [
+    '@mui/material',
+    '@mui/icons-material',
+    '@mui/x-date-pickers',
+    '@emotion/react',
+    '@emotion/styled',
+  ],
   async headers() {
     return [
       {

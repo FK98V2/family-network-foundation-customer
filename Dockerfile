@@ -29,6 +29,8 @@ ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps --chown=node:node /app/node_modules ./node_modules
 # ดึง source code
 COPY --chown=node:node . .
+# WORKDIR is created by root; hand ownership to node so Next can create /app/.next
+RUN chown node:node /app
 USER node
 RUN yarn build         
 
