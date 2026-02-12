@@ -1,7 +1,28 @@
 import { NextResponse } from 'next/server';
 import { Activity, Response } from '@/app/type';
+import {
+  checkRateLimit,
+  tooManyRequestsResponse,
+} from '@/app/_utils/apiSecurity';
 
-export async function GET(): Promise<NextResponse<Response<Activity[]>>> {
+export async function GET(
+  request: Request
+): Promise<NextResponse<Response<Activity[]>>> {
+  const { allowed, retryAfterSeconds } = checkRateLimit(request, {
+    keyPrefix: 'next-api:activities-highlight',
+    maxRequests: 60,
+  });
+  if (!allowed) {
+    return tooManyRequestsResponse(
+      {
+        data: [],
+        message: 'Too many requests',
+        status: 429,
+      },
+      retryAfterSeconds
+    );
+  }
+
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/articles/activity/highlight`,
@@ -10,6 +31,7 @@ export async function GET(): Promise<NextResponse<Response<Activity[]>>> {
           'Content-Type': 'application/json',
         },
         cache: 'no-store', // ไม่ cache ที่ route handler เพราะเราจะ cache ที่ component
+        signal: AbortSignal.timeout(8000),
       }
     );
 

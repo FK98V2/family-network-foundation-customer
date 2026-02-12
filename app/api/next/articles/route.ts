@@ -1,12 +1,40 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Article, ResponsePagination } from '@/app/type';
+import {
+  checkRateLimit,
+  parseBoundedInt,
+  tooManyRequestsResponse,
+} from '@/app/_utils/apiSecurity';
 
 export async function GET(
   request: NextRequest
 ): Promise<NextResponse<ResponsePagination<Article[]>>> {
   const searchParams = request.nextUrl.searchParams;
-  const pageNumber = searchParams.get('page') || '0';
-  const pageSize = searchParams.get('size') || '10';
+  const pageNumber = parseBoundedInt(searchParams.get('page'), 0, 0, 500);
+  const pageSize = parseBoundedInt(searchParams.get('size'), 10, 1, 50);
+
+  const { allowed, retryAfterSeconds } = checkRateLimit(request, {
+    keyPrefix: 'next-api:articles',
+    maxRequests: 90,
+  });
+  if (!allowed) {
+    return tooManyRequestsResponse(
+      {
+        data: {
+          content: [],
+          pagination: {
+            pageNumber,
+            pageSize,
+            totalElements: 0,
+            totalPages: 0,
+          },
+        },
+        message: 'Too many requests',
+        status: 429,
+      },
+      retryAfterSeconds
+    );
+  }
 
   try {
     const response = await fetch(
@@ -16,11 +44,9 @@ export async function GET(
           'Content-Type': 'application/json',
         },
         cache: 'no-store',
+        signal: AbortSignal.timeout(8000),
       }
     );
-
-    if (!response.ok) {
-    }
 
     const data = await response.json();
     return NextResponse.json(data);
@@ -31,8 +57,8 @@ export async function GET(
         data: {
           content: [],
           pagination: {
-            pageNumber: parseInt(pageNumber) || 0,
-            pageSize: parseInt(pageSize) || 10,
+            pageNumber,
+            pageSize,
             totalElements: 0,
             totalPages: 0,
           },

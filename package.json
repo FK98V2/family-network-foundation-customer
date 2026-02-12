@@ -22,9 +22,9 @@
     "dayjs": "^1.11.13",
     "html-react-parser": "^5.2.6",
     "leaflet": "^1.9.4",
-    "next": "15.3.5",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "15.5.12",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "react-leaflet": "^5.0.0"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.3.5",
+    "eslint-config-next": "15.5.12",
     "typescript": "^5"
   }
 }
