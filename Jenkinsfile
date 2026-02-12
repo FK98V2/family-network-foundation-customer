@@ -21,12 +21,26 @@ pipeline {
             }
         }
 
+        stage('Show revision') {
+            steps {
+                script {
+                    env.GIT_SHA = sh(script: 'git rev-parse --short=12 HEAD', returnStdout: true).trim()
+                }
+                sh '''
+                    echo "Workspace revision: $GIT_SHA"
+                    git log -1 --oneline
+                '''
+            }
+        }
+
         stage('Docker Build') {
             steps {
                 sh '''
                     docker build \
+                      --pull \
                       --build-arg NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL \
                       --build-arg NEXT_PUBLIC_CONTEXT_URL=$NEXT_PUBLIC_CONTEXT_URL \
+                      --build-arg GIT_SHA=$GIT_SHA \
                       -t family-customer:local .
                 '''
             }

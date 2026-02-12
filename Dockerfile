@@ -39,6 +39,8 @@ RUN yarn build
 ###########################
 FROM node:18-alpine AS runner
 WORKDIR /app
+ARG GIT_SHA=local
+LABEL org.opencontainers.image.revision=$GIT_SHA
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 USER node
