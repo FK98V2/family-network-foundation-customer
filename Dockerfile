@@ -16,8 +16,6 @@ RUN \
 ###########################
 FROM node:18-alpine AS builder
 WORKDIR /app
-# ใช้ root เพื่อจัดการ permission ก่อนค่อยสลับ user ตอน build
-USER root
 
 # Build-time environment variables
 ARG NEXT_PUBLIC_API_URL=https://family-network.or.th
@@ -25,14 +23,12 @@ ARG NEXT_PUBLIC_CONTEXT_URL=https://family-network.or.th
 # Pass build ARGs as ENV vars for Next.js build process
 ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 ENV NEXT_PUBLIC_CONTEXT_URL=${NEXT_PUBLIC_CONTEXT_URL}
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # ดึง node_modules มาจาก deps
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps --chown=node:node /app/node_modules ./node_modules
 # ดึง source code
-COPY . .
-
-# ใช้ uid/gid เดียวกับ user node เพื่อเลี่ยง permission error
-RUN chown -R node:node /app
+COPY --chown=node:node . .
 USER node
 RUN yarn build         
 
@@ -42,6 +38,7 @@ RUN yarn build
 FROM node:18-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 USER node
 
 

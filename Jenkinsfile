@@ -4,6 +4,8 @@ pipeline {
     environment {
         APP_DIR   = '/srv/family-new/family-network-foundation-customer'
         STACK_DIR = '/srv/family-new'
+        DOCKER_BUILDKIT = '1'
+        COMPOSE_DOCKER_CLI_BUILD = '1'
         NEXT_PUBLIC_API_URL = 'https://family-network.or.th/api/v1'
         NEXT_PUBLIC_CONTEXT_URL = 'https://family-network.or.th'
     }
@@ -18,7 +20,10 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh '''
-                    docker build -t family-customer:local .
+                    docker build \
+                      --build-arg NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL \
+                      --build-arg NEXT_PUBLIC_CONTEXT_URL=$NEXT_PUBLIC_CONTEXT_URL \
+                      -t family-customer:local .
                 '''
             }
         }
@@ -27,7 +32,7 @@ pipeline {
             steps {
                 sh '''
                     cd $STACK_DIR
-                    docker compose up -d --force-recreate customer
+                    docker compose up -d --no-deps customer
                 '''
             }
         }
