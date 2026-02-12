@@ -1,6 +1,10 @@
 pipeline {
     agent any      
 
+    options {
+        skipDefaultCheckout(true)
+    }
+
     environment {
         APP_DIR   = '/srv/family-new/family-network-foundation-customer'
         STACK_DIR = '/srv/family-new'
